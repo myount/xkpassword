@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("XkPassword")]
 [assembly: AssemblyDescription("A password generator library inspired by a well-known webcomic")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Michael Yount")]
 [assembly: AssemblyProduct("XkPassword")]
 [assembly: AssemblyCopyright("Copyright © 2014 Michael Yount")]
 [assembly: AssemblyTrademark("")]

@@ -234,7 +234,7 @@ namespace XkPassword
         /// </summary>
         /// <value>
         ///     A <see cref="Nullable{T}" /> of <see cref="char" />.  ASCII NUL ('\0') or null value means choose randomly from
-        ///     <see cref="SeparatorAlphabet" />.
+        ///     <see cref="SymbolAlphabet" />.
         /// </value>
         public char? PaddingCharacter { get; set; }
 
@@ -448,6 +448,16 @@ namespace XkPassword
         }
 
         /// <summary>
+        /// Gets a random symbol from the symbol alphabet.
+        /// </summary>
+        /// <returns>A random symbol from <see cref="SymbolAlphabet"/>, as a <see cref="char"/>.</returns>
+        private char GetRandomSymbol()
+        {
+            return
+                this.SymbolAlphabet.ElementAt(this.RandomSource.Next(0, this.SymbolAlphabet.Count));
+        }
+
+        /// <summary>
         ///     Performs character substitutions on an <see cref="IEnumerable{T}" /> of <see cref="string" /> according to the
         ///     substitutions provided in <see cref="CharacterSubstitutions" />.
         /// </summary>
@@ -528,7 +538,7 @@ namespace XkPassword
                     case Padding.Fixed:
                         if (!hadPaddingChar)
                         {
-                            this.PaddingCharacter = separator[0];
+                            this.PaddingCharacter = GetRandomSymbol();
                         }
 
                         if (this.PaddingCharactersBefore > 0)

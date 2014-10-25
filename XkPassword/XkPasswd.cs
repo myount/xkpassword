@@ -567,9 +567,9 @@ namespace XkPassword
 
                         if (!hadPaddingChar)
                         {
-                            this.PaddingCharacter =
-                                this.SymbolAlphabet.ElementAt(this.RandomSource.Next(0, this.SymbolAlphabet.Count));
+                            this.PaddingCharacter = GetRandomSymbol();
                         }
+
                         if (passwordBuilder.Length < this.PadToLength)
                         {
                             passwordBuilder.Append(this.PaddingCharacter.Value,

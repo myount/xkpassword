@@ -18,11 +18,6 @@ namespace XkPassword
     /// </summary>
     public class XkPasswd
     {
-        /// <summary>
-        ///     A random number generator.
-        /// </summary>
-        private static readonly Random RandomNumberGenerator = new Random();
-
         private int _maxWordLength;
 
         private int _minWordLength;
@@ -75,6 +70,7 @@ namespace XkPassword
             this.PadToLength = 0;
             this.CaseTransform = CaseTransformation.Capitalize;
             this.CharacterSubstitutions = new Dictionary<char, char>();
+            this.RandomSource = new DefaultRandomSource();
         }
 
         /// <summary>
@@ -314,6 +310,15 @@ namespace XkPassword
         public Dictionary<char, char> CharacterSubstitutions { get; set; }
 
         /// <summary>
+        /// Gets or sets an instance of a class that will be used to generate random integers.  Any class used for this purpose
+        /// must implement <see cref="IRandomSource"/>.
+        /// </summary>
+        /// <value>
+        /// A class implementing <see cref="IRandomSource"/>.
+        /// </value>
+        public IRandomSource RandomSource { get; set; }
+
+        /// <summary>
         ///     Randomly selects words between <see cref="MinWordLength" /> characters and <see cref="MaxWordLength" /> characters
         ///     in length, inclusive,
         ///     from the word list.
@@ -341,7 +346,7 @@ namespace XkPassword
 
             for (int i = 0; i < this.WordCount; i++)
             {
-                yield return suitableWords.ElementAt(RandomNumberGenerator.Next(0, suitableWords.Count()));
+                yield return suitableWords.ElementAt(this.RandomSource.Next(0, suitableWords.Count()));
             }
         }
 
@@ -369,7 +374,7 @@ namespace XkPassword
                     return words.Select(w =>
                         {
                             char[] wChars = w.ToLowerInvariant().ToCharArray();
-                            bool startCaps = RandomNumberGenerator.CoinFlip();
+                            bool startCaps = this.RandomSource.CoinFlip();
                             for (int i = 0; i < wChars.Length; i++)
                             {
                                 if (startCaps)
@@ -395,7 +400,7 @@ namespace XkPassword
                         words.Select(
                                      w =>
                                      new string(
-                                         w.ToUpperInvariant().Select(c => (char)(c + (RandomNumberGenerator.CoinFlip() ? ' ' : '\0')))
+                                         w.ToUpperInvariant().Select(c => (char)(c + (this.RandomSource.CoinFlip() ? ' ' : '\0')))
                                           .ToArray()));
                 default:
                     return words;
@@ -407,11 +412,11 @@ namespace XkPassword
         /// </summary>
         /// <param name="num">The number of random digits to return.</param>
         /// <returns>The number of random digits specified by <paramref name="num" />.</returns>
-        private static IEnumerable<char> GetRandomDigits(int num)
+        private IEnumerable<char> GetRandomDigits(int num)
         {
             for (int i = 0; i < num; i++)
             {
-                yield return (char)(RandomNumberGenerator.Next(48, 58));
+                yield return (char)(this.RandomSource.Next(48, 58));
             }
         }
 
@@ -436,9 +441,9 @@ namespace XkPassword
                               ? ""
                               : this.SeparatorCharacter.Value.ToString(CultureInfo.InvariantCulture))
                        : (this.SeparatorAlphabet == null
-                              ? this.SymbolAlphabet.ElementAt(RandomNumberGenerator.Next(0, this.SymbolAlphabet.Count))
+                              ? this.SymbolAlphabet.ElementAt(this.RandomSource.Next(0, this.SymbolAlphabet.Count))
                                     .ToString(CultureInfo.InvariantCulture)
-                              : this.SeparatorAlphabet.ElementAt(RandomNumberGenerator.Next(0, this.SeparatorAlphabet.Count))
+                              : this.SeparatorAlphabet.ElementAt(this.RandomSource.Next(0, this.SeparatorAlphabet.Count))
                                     .ToString(CultureInfo.InvariantCulture));
         }
 
@@ -553,7 +558,7 @@ namespace XkPassword
                         if (!hadPaddingChar)
                         {
                             this.PaddingCharacter =
-                                this.SymbolAlphabet.ElementAt(RandomNumberGenerator.Next(0, this.SymbolAlphabet.Count));
+                                this.SymbolAlphabet.ElementAt(this.RandomSource.Next(0, this.SymbolAlphabet.Count));
                         }
                         if (passwordBuilder.Length < this.PadToLength)
                         {

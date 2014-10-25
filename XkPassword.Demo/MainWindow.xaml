@@ -104,7 +104,7 @@
             </DockPanel>
             <Button Name="btnGenerate" Margin="5,0" Click="btnGenerate_Click">Generate</Button>
             <TextBox Name="tbPasswords" IsReadOnly="True" Margin="5" Height="100" MaxHeight="100"
-                     VerticalScrollBarVisibility="Auto" UndoLimit="0" />
+                     VerticalScrollBarVisibility="Auto" UndoLimit="0" FontFamily="Consolas" />
         </StackPanel>
     </DockPanel>
 </Window>

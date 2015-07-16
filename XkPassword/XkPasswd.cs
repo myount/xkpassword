@@ -336,7 +336,7 @@ namespace XkPassword
 
             IEnumerable<string> suitableWords =
                 reader.ReadAllLines()
-                      .Where(w => (w.Length > this.MinWordLength) && (w.Length < this.MaxWordLength))
+                      .Where(w => (w.Length >= this.MinWordLength) && (w.Length <= this.MaxWordLength))
                       .ToList();
 
 #if DEBUG

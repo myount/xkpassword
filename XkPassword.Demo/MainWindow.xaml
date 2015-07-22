@@ -93,6 +93,7 @@
                         <ComboBoxItem>iNVERTED cASE</ComboBoxItem>
                         <ComboBoxItem>AlTeRnAtInG CaSe</ComboBoxItem>
                         <ComboBoxItem>rANdoMly CAPitaLiZE</ComboBoxItem>
+                        <ComboBoxItem>RANDOMLY capitalize entire WORD</ComboBoxItem>
                     </ComboBox.Items>
                 </ComboBox>
             </DockPanel>

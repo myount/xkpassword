@@ -336,7 +336,7 @@ namespace XkPassword
 
             IEnumerable<string> suitableWords =
                 reader.ReadAllLines()
-                      .Where(w => (w.Length > this.MinWordLength) && (w.Length < this.MaxWordLength))
+                      .Where(w => (w.Length >= this.MinWordLength) && (w.Length <= this.MaxWordLength))
                       .ToList();
 
 #if DEBUG
@@ -402,6 +402,8 @@ namespace XkPassword
                                      new string(
                                          w.ToUpperInvariant().Select(c => (char)(c + (this.RandomSource.CoinFlip() ? ' ' : '\0')))
                                           .ToArray()));
+                case CaseTransformation.RandomWord:
+                    return words.Select(w => this.RandomSource.CoinFlip() ? w.ToUpperInvariant() : w.ToLowerInvariant());
                 default:
                     return words;
             }

@@ -38,6 +38,11 @@
         /// <summary>
         ///     RAndOmLY capITAliZe thE WorD.
         /// </summary>
-        Random = 6
+        Random = 6,
+
+        /// <summary>
+        ///     RANDOMLY capitalize entire WORD
+        /// </summary>
+        RandomWord = 7
     }
 }

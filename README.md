@@ -1,4 +1,6 @@
 # XkPassword
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmyount%2Fxkpassword.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmyount%2Fxkpassword?ref=badge_shield)
+
 XkPassword is a C# reimplementation of [Bart Busschots' `xkpasswd.pm`][xkpasswd.pm], a library for generating
 secure memorable passwords inspired mainly by [a well-known xkcd comic][xkcd].
 
@@ -24,3 +26,6 @@ reusing different configurations.
 XkPassword.Demo is a rudimentary application which demonstrates all capabilities of XkPassword except the
 ability to choose a different word list file.  It is built using Windows Presentation Foundation and requires
 version 4.5 of the .NET Framework.
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmyount%2Fxkpassword.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmyount%2Fxkpassword?ref=badge_large)
